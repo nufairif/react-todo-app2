@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Todos from "./components/Todos";
+import TodoForm from "./components/TodoForm";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 // import './App.css'
@@ -38,12 +39,29 @@ const App = () => {
 
     setTodos(newTodos);
   };
+
   // console.log(todos);
+
+  const addTodo = (todoTitle) => {
+    if (todoTitle === "") {
+      return;
+    }
+
+    const newTodos = {
+      id: todos.length + 1,
+      title: todoTitle,
+      completed: false,
+    };
+
+    const updatedTodos = todos.concat(newTodos);
+    setTodos(updatedTodos);
+  };
 
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>My Todo List</h1>
-      {/* Teruskan function toggleCompleted ke component Todos */}
+      {/* Teruskan function addTodo sebagai props */}
+      <TodoForm addTodo={addTodo} />
       <Todos
         todos={todos}
         toggleCompleted={toggleCompleted}
